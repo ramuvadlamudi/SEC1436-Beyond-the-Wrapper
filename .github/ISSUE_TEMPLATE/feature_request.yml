@@ -1,0 +1,25 @@
+name: Feature request
+description: Propose an evidence-first, read-only enhancement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: SOC problem
+      description: Describe the analyst problem without customer-sensitive details.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Required evidence and safety boundaries
+      description: Explain what evidence would qualify the output and what the product must refuse or leave approval-gated.
+    validations:
+      required: true

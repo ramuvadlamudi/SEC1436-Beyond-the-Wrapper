@@ -1,0 +1,66 @@
+SEC1436 / ARIA RC11 — UPLOAD TO GITHUB FROM A MAC USING THE WEB UI
+===================================================================
+
+This repository package includes hidden files and folders:
+
+  .env.example
+  .gitignore
+  .gitattributes
+  .editorconfig
+  .github/
+
+DO NOT upload a populated .env file.
+
+1. Extract the publication ZIP on your Mac.
+
+2. Open the "repository" folder supplied in the publication kit.
+
+3. In Finder, press Command + Shift + .
+   This shows hidden files and the .github folder.
+
+4. In GitHub, create a new empty repository.
+   Do not initialise it with a README, .gitignore or licence because all three
+   are already included.
+
+5. Open the empty repository and choose:
+
+   Add file > Upload files
+
+6. Open the local "repository" folder. Select its CONTENTS, including every
+   hidden item listed above, and drag them into the GitHub upload page.
+
+   Upload the contents—not the outer "repository" folder—so README.md appears
+   at the repository root.
+
+7. Before committing, confirm the upload list includes:
+
+   .github/workflows/validate.yml
+   .env.example
+   .gitignore
+   README.md
+   aria/
+   docs/
+   patterns/
+   product/
+   scripts/
+
+8. Commit with a message such as:
+
+   Publish SEC1436 patterns and ARIA v3.0.0-rc11
+
+9. Open the Actions tab. The "Validate ARIA RC11" workflow must pass.
+
+10. In Settings, enable branch protection, secret scanning, dependency alerts
+    and private vulnerability reporting where available.
+
+11. Replace OWNER/REPOSITORY in .github/ISSUE_TEMPLATE/config.yml with the
+    final GitHub owner and repository name.
+
+12. Create the v3.0.0-rc11 GitHub Release only after approval. Attach the files
+    from the publication kit's "release-assets" folder and verify their SHA256
+    checksums before upload.
+
+If the browser does not accept a folder drag, upload the visible root files,
+then create nested paths through GitHub's "Create new file" UI. For example,
+entering .github/workflows/validate.yml as the filename creates the hidden
+directory path.

@@ -1,0 +1,33 @@
+# Runtime configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime output
+data/
+checkpoints/
+releases/
+*.log
+*.pid
+*.backup
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/

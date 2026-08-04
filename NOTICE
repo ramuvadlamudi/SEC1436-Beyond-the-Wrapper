@@ -1,0 +1,21 @@
+ARIA
+Copyright 2026 The ARIA Authors
+
+This product includes source-attributed local reference material derived from
+publicly available cybersecurity framework documentation.
+
+MITRE ATT&CK and MITRE ATLAS are resources and trademarks of The MITRE
+Corporation. ARIA is not endorsed by or affiliated with The MITRE Corporation.
+Authoritative reference URLs are recorded in
+product/knowledge/reference_cards.json.
+
+Splunk is a trademark of Splunk LLC. Ollama is a trademark of its respective
+owner. Their names are used only to describe interoperability. This project is
+not endorsed by or affiliated with those trademark owners.
+
+References to the Splunk AI Toolkit and Splunk App for Data Science and Deep
+Learning (DSDL) describe interoperability patterns and future experiments.
+Pattern C is not an ARIA v3.0.0-rc11 product commitment.
+
+No customer telemetry, credential or deployment-specific mapping is intended to
+be distributed with the public source archive.

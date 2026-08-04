@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "description": "Curated, source-attributed local reference cards used to ground air-gapped SOC conversations. Cards contain public framework facts, not customer telemetry mappings.",
+  "cards": [
+    {
+      "id": "mitre-atlas",
+      "canonical_name": "MITRE ATLAS",
+      "aliases": [
+        "MITRE ATLAS",
+        "ATLAS framework"
+      ],
+      "required_phrases": [
+        "Adversarial Threat Landscape for Artificial-Intelligence Systems",
+        "AI-enabled systems"
+      ],
+      "summary": "MITRE ATLAS is a living knowledge base of adversary tactics and techniques against AI-enabled systems, based on real-world observations, demonstrations and security research.",
+      "sections": {
+        "Exact definition": "MITRE ATLAS, the Adversarial Threat Landscape for Artificial-Intelligence Systems, is a living knowledge base of adversary tactics and techniques against AI-enabled systems. It provides a common language for describing how adversaries can target machine-learning and AI capabilities. Its content is informed by observed attacks, demonstrations, AI red-team activity and published security research. ATLAS is threat knowledge: it helps defenders structure questions and controls, but it is not proof that a particular event is malicious.",
+        "Scope and structure": "ATLAS organises adversarial-AI knowledge using tactics, techniques and related defensive material. Its scope covers the AI system lifecycle and the surrounding applications, data, models, interfaces, infrastructure and supply chain that make an AI-enabled service operate. Case studies connect abstract behaviours with practical examples, while mitigations describe defensive approaches. A useful implementation starts with the AI assets and trust boundaries that actually exist, then selects applicable behaviours instead of treating the complete framework as universally relevant.",
+        "Relationship to adjacent concepts": "MITRE ATLAS is related to, but distinct from, MITRE ATT&CK. ATT&CK is the broader knowledge base of adversary behaviour across enterprise, cloud, mobile, industrial and other technology environments. ATLAS applies a similar threat-informed taxonomy to attacks involving AI-enabled systems. One incident can require both: conventional intrusion behaviour may explain how an adversary reached an AI service, while ATLAS can describe behaviour directed at the data, model, inference interface or AI-dependent workflow. The frameworks are complementary and must not be substituted for one another.",
+        "SOC operational use": "A SOC can use ATLAS to create AI-focused threat models, organise adversarial-AI hunts, guide purple-team exercises, identify monitoring gaps and structure incident-response questions. Analysts begin with a selected behaviour and define the evidence that would support or contradict it. Detection engineers translate that evidence requirement into observable telemetry and bounded analytics. Threat hunters look for relationships across identity, application, model-serving, data-pipeline, endpoint and network evidence. Responders use the framework to communicate what is known, what remains an inference and which AI assets or trust boundaries require validation.",
+        "Splunk application": "Splunk can support ATLAS-aligned monitoring by collecting security metadata from AI gateways and applications, model-serving platforms, prompt and response controls, identity systems, tool-call execution, endpoints, networks, data pipelines, model registries and administrative change records. ARIA should first discover what telemetry is available, validate populated fields and co-occurrence, and only then build or execute bounded read-only SPL. Framework mapping supplies the threat hypothesis; live Splunk results supply deployment facts. Useful views include data health, AI asset coverage, behaviour-to-telemetry mapping, analytic validation status and evidence gaps.",
+        "Limitations and validation": "ATLAS is not a complete detection pack, an AI risk-management standard or evidence that an attack occurred. Framework coverage does not guarantee telemetry quality, analytic effectiveness or operational readiness. The knowledge base evolves, and technique names or identifiers should be checked against the authoritative local version before formal use. Organisations must add their own AI inventory, architecture, risk appetite, trust boundaries and expected behaviour. Security conclusions still require returned evidence, corroboration and analyst judgment; the framework should guide investigation without turning a possible behaviour into a verdict."
+      },
+      "sources": [
+        {
+          "title": "MITRE ATLAS",
+          "publisher": "MITRE",
+          "url": "https://atlas.mitre.org/",
+          "verified_on": "2026-07-29"
+        },
+        {
+          "title": "SAFE-AI: A Framework for Securing AI-Enabled Systems",
+          "publisher": "MITRE",
+          "url": "https://atlas.mitre.org/pdf-files/SAFEAI_Full_Report.pdf",
+          "verified_on": "2026-07-29"
+        }
+      ]
+    },
+    {
+      "id": "mitre-attack",
+      "canonical_name": "MITRE ATT&CK",
+      "aliases": [
+        "MITRE ATT&CK",
+        "MITRE ATTACK",
+        "ATT&CK framework"
+      ],
+      "required_phrases": [
+        "Adversarial Tactics, Techniques, and Common Knowledge",
+        "real-world observations"
+      ],
+      "summary": "MITRE ATT&CK is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations.",
+      "sections": {
+        "Exact definition": "MITRE ATT&CK, the Adversarial Tactics, Techniques, and Common Knowledge knowledge base, describes adversary tactics and techniques based on real-world observations. It provides a common language for modelling how adversaries pursue objectives and interact with systems during operations. ATT&CK is threat knowledge rather than a product, detection pack or claim that a specific event is malicious.",
+        "Scope and structure": "ATT&CK organises behaviour into tactics, techniques and sub-techniques across supported technology domains. Tactics describe why an adversary acts, techniques describe how an objective may be achieved, and sub-techniques provide more specific behaviour. The knowledge base also connects relevant software, groups, campaigns, mitigations and data components. Organisations should select the domains and behaviours relevant to their own environment rather than treating raw coverage counts as security maturity.",
+        "Relationship to adjacent concepts": "ATT&CK is distinct from compliance frameworks, risk-management standards and analytic repositories. It describes adversary behaviour; it does not prescribe one mandatory control or SPL implementation. It is also distinct from MITRE ATLAS, which applies related threat-informed concepts specifically to adversarial behaviour against AI-enabled systems. The two can be used together when conventional intrusion behaviour and AI-specific targeting appear in the same threat scenario.",
+        "SOC operational use": "SOC teams use ATT&CK to structure threat models, normalise detection and investigation language, prioritise telemetry, map analytic coverage, guide hunts and communicate incident behaviour. Detection engineers should map each selected technique to a testable hypothesis and required evidence, then validate the analytic against representative events. Analysts should preserve the difference between a technique mapping, an observed behaviour and a confirmed security verdict.",
+        "Splunk application": "Splunk can map ATT&CK behaviours to the telemetry categories available in a deployment, validate source and field readiness, execute bounded analytics and track evidence gaps. Useful operational views include technique-to-data coverage, analytic health, validation status, alert outcomes and missing telemetry. ARIA must discover deployment facts at runtime and cannot infer that a technique is observable merely because a source exists or an event count is positive.",
+        "Limitations and validation": "ATT&CK does not prove detection effectiveness, provide an exhaustive model of every adversary or replace local risk assessment. Coverage metrics can be misleading when telemetry is incomplete, fields are unpopulated or analytics have not been tested. Names, identifiers and framework structure evolve and should be checked against an authoritative local copy before formal publication. Returned events and corroborating evidence remain necessary for security conclusions."
+      },
+      "sources": [
+        {
+          "title": "MITRE ATT&CK",
+          "publisher": "MITRE",
+          "url": "https://attack.mitre.org/",
+          "verified_on": "2026-07-29"
+        },
+        {
+          "title": "MITRE ATT&CK: Get Started",
+          "publisher": "MITRE",
+          "url": "https://attack.mitre.org/resources/",
+          "verified_on": "2026-07-29"
+        }
+      ]
+    }
+  ]
+}

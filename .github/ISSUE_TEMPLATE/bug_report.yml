@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a reproducible ARIA defect without credentials or private telemetry.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, tokens, customer identifiers, private telemetry, prompts containing sensitive data, or exploit details.
+  - type: input
+    id: version
+    attributes:
+      label: ARIA version
+      placeholder: 3.0.0-rc11
+    validations:
+      required: true
+  - type: dropdown
+    id: capability
+    attributes:
+      label: Capability
+      options:
+        - Routing / Scope Guard
+        - SOC Conversation
+        - SPL Builder
+        - Investigation
+        - Triage
+        - Evidence Deliverable
+        - Telemetry Inventory
+        - UI / Deployment
+        - Packaging / Validation
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behaviour
+      description: Redact all environment-specific and sensitive values.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal sanitized reproduction
+      description: Include only the steps and synthetic inputs needed to reproduce the issue.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed credentials, tokens, private addresses, customer data and sensitive telemetry.
+          required: true

@@ -1,0 +1,20 @@
+schema_version: "1.0"
+corpus_id: "<CORPUS_ID>"
+owner: "<APPROVED_OWNER>"
+classification: "<CLASSIFICATION>"
+purpose: "<APPROVED_PURPOSE>"
+embedding_model: "<PINNED_LOCAL_EMBEDDING_MODEL>"
+chunking_policy: "<VERSIONED_CHUNKING_POLICY>"
+created_at: "<ISO_8601_TIMESTAMP>"
+documents:
+  - document_id: "<DOCUMENT_ID>"
+    title: "<DOCUMENT_TITLE>"
+    source_uri: "<APPROVED_INTERNAL_URI>"
+    version: "<DOCUMENT_VERSION>"
+    checksum_sha256: "<SHA256>"
+    effective_date: "<YYYY-MM-DD>"
+    review_date: "<YYYY-MM-DD>"
+    access_groups:
+      - "<AUTHORISED_GROUP>"
+    status: "approved"
+

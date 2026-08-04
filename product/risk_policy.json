@@ -1,0 +1,23 @@
+{
+  "policy_name": "ARIA Evidence-Aware Risk Recommendation Policy",
+  "policy_version": "2.1",
+  "minimum_evidence_confidence": 60,
+  "minimum_supporting_claims": 1,
+  "require_security_relevant_finding": true,
+  "base_factors": {
+    "evidence_confidence": 30,
+    "cross_source_corroboration": 20,
+    "relationship_strength": 15,
+    "repeated_or_concentrated_activity": 15,
+    "outcome_support": 10,
+    "analyst_supplied_entity_match": 10
+  },
+  "penalties": {
+    "missing_required_evidence": 15,
+    "contradicting_evidence": 15,
+    "single_source_only": 10,
+    "weak_field_binding": 10
+  },
+  "maximum_recommendation": 100,
+  "writeback_enabled": false
+}

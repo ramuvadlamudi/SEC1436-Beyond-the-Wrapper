@@ -1,0 +1,87 @@
+{
+  "allowed_outputs": [
+    "explanations",
+    "read_only_spl",
+    "candidate_spl",
+    "detection_drafts",
+    "field_binding_worksheets",
+    "rba_ers_recommendations",
+    "soar_playbook_drafts",
+    "tdir_workflow_drafts",
+    "analyst_next_steps"
+  ],
+  "applies_to": "ARIA v3",
+  "approval_gates": [
+    "field_binding_confirmation",
+    "detection_validation",
+    "rba_ers_review",
+    "soar_playbook_review",
+    "operationalisation_approval"
+  ],
+  "blocked_outputs": [
+    "delete_spl",
+    "collect_writeback_spl",
+    "enabled_correlation_search_creation",
+    "automatic_soar_execution",
+    "automatic_containment",
+    "credential_exfiltration",
+    "malware_code_generation",
+    "destructive_admin_commands"
+  ],
+  "core_principle": "The local LLM forms hypotheses. Splunk establishes facts. Deterministic controls enforce policy. The analyst owns the decision.",
+  "dataset_agnostic_rules": [
+    "Do not hardcode indexes, sourcetypes, sources or data models",
+    "Do not hardcode fields, event IDs, vendors or use-case mappings",
+    "Do not hardcode users, hosts, IPs, domains, entities, thresholds or IOCs",
+    "Use only analyst-supplied values, live Splunk-discovered values or validated observed values",
+    "Reject unsupported field mappings and abstain when evidence is insufficient"
+  ],
+  "default_mode": "read_only",
+  "execution_boundaries": {
+    "destructive_actions": "blocked",
+    "detection_creation": "draft_only",
+    "external_network_calls": "disabled_by_design_for_airgap",
+    "risk_event_writeback": "disabled",
+    "soar_execution": "draft_only",
+    "splunk_access": "read_only"
+  },
+  "policy_name": "ARIA Runtime Safety Policy",
+  "policy_version": "2.1",
+  "spl_read_only_policy": {
+    "blocked_commands": [
+      "collect",
+      "dbxquery",
+      "delete",
+      "inputlookup",
+      "loadjob",
+      "map",
+      "mcollect",
+      "outputcsv",
+      "outputlookup",
+      "rest",
+      "script",
+      "sendalert",
+      "sendemail"
+    ],
+    "blocked_functions_or_actions": [
+      "notable"
+    ],
+    "default_if_policy_missing": "fail_closed",
+    "description": "Generic read-only SPL safety policy enforced by the live SPL validator. This policy is product safety configuration, not customer dataset logic."
+  },
+  "v1_caveats": [
+    "Controlled preview release",
+    "Read-only by default",
+    "Human approval required before operationalisation",
+    "Local file-based audit logging",
+    "No enterprise RBAC in V1",
+    "No high-availability deployment pattern in V1"
+  ],
+  "evidence_requirements": [
+    "Qualify sources using live profiles rather than source-name resemblance",
+    "Validate fields and observed values before compiling SPL",
+    "Require bounded co-occurrence evidence for multi-concept claims",
+    "Link model claims to evidence ledger IDs",
+    "Calculate confidence and risk deterministically from evidence"
+  ]
+}
