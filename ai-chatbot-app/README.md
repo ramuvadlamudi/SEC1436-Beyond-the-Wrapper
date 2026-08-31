@@ -81,9 +81,13 @@ chatbot_app/
     └── chat.css                # chat bubble styling
 ```
 
+## Download
+
+The full, ready-to-install Splunk app package is included in this folder: **[`chatbot_app.tar.gz`](chatbot_app.tar.gz)**. It contains everything needed to deploy — the custom search command, the bundled `splunklib` dependency, the dashboard, and the front-end chat UI. Click that link on GitHub and use the **Download raw file** button to grab it.
+
 ## Setup
 
-1. Package the app folder above into a `.tar.gz`.
+1. Download `chatbot_app.tar.gz` from this folder (see above).
 2. Install via Splunk Web (**Apps → Manage Apps → Install app from file**) or by extracting directly into `$SPLUNK_HOME/etc/apps/` over SSH.
 3. Set the real LLM endpoint in `bin/ollamachat.py` (`OLLAMA_URL`) — this is environment-specific and won't be committed with a real IP in this repo.
 4. Restart Splunk.
