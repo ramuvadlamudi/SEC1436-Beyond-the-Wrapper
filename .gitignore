@@ -31,3 +31,4 @@ releases/
 .DS_Store
 .idea/
 .vscode/
+!ai-chatbot-app/chatbot_app.tar.gz
