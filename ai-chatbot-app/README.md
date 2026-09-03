@@ -85,6 +85,21 @@ chatbot_app/
 
 The full, ready-to-install Splunk app package is included in this folder: **[`chatbot_app.tar.gz`](chatbot_app.tar.gz)**. It contains everything needed to deploy — the custom search command, the bundled `splunklib` dependency, the dashboard, and the front-end chat UI. Click that link on GitHub and use the **Download raw file** button to grab it.
 
+## Known Limitations / Scaling Considerations
+
+This has been built and tested at pilot scale, on a standalone Splunk instance. Before sharing widely or treating it as production infrastructure, be aware of:
+
+- **Single LLM endpoint, no real concurrency handling.** Ollama serving one model on one host is effectively single-threaded for inference, and replies aren't streamed — so each chat search job stays open for the *entire* generation time, not just until a first response starts. This is the real ceiling on simultaneous users. Load-test with realistic concurrent usage before assuming it scales; consider a proper inference server (vLLM, TGI) with continuous batching, or multiple Ollama instances behind a load balancer, if it doesn't.
+- **Splunk search concurrency, compounding the above.** Each chat turn holds a real search slot for the full generation time. Review and likely raise `limits.conf` concurrency settings for this app specifically, and keep the dedicated-search-head isolation from the original architecture guide in place as usage grows.
+- **The grounding search doubles the load per message** — every non-greeting question triggers a second real Splunk search in addition to the LLM call, adding indexer load on top of inference load.
+- **KV store isn't indexed by default** (now partially addressed — see `accelerated_fields` in `collections.conf`), has no hard size ceiling beyond the retention job actually running successfully, and is architecturally the wrong long-term store if message volume grows well past a chatbot pilot's typical pattern.
+- **Untested on a Search Head Cluster.** KV store collections replicate automatically across SHC members, but this app needs to go through the deployer properly in that topology, and the whole pattern hasn't been verified there yet.
+- **Session ownership depends on `searchinfo.username` being the real analyst identity.** Confirm this explicitly under your actual auth setup (SAML/SSO/proxy) before trusting it as an access control — the ownership check we built is only as good as that value being correct.
+- **No per-user rate limiting.** One analyst (or a misbehaving script) can currently monopolize the LLM host with no cap.
+- **No HA for the Ollama host, and no retry/resilience on transient errors** — a network blip surfaces as a raw error bubble rather than a retry.
+
+None of this blocks a pilot or a demo. It matters once this moves toward "everyone in the SOC uses this daily" — treat that as a genuine scaling exercise (load testing, capacity planning, possibly a different inference backend), not just a bigger deployment of the same thing.
+
 ## Setup
 
 1. Download `chatbot_app.tar.gz` from this folder (see above).
