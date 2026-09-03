@@ -21,13 +21,13 @@ No external network calls at any point — the LLM endpoint is an internal IP wi
 
 ## Screenshots
 
-**A working multi-turn conversation** — note the follow-up SPL-writing question builds on context from earlier in the chat:
+**A full multi-turn conversation**, showing the live status badge (green = online, with the actual connected model name), the welcome message, and the full-width, centered-column layout:
 
-![Chat conversation example](screenshots/chat-example-conversation.png)
+![Full conversation with live status badge](screenshots/chat-full-conversation.png)
 
-**The chat interface in its default state**, ready for input:
+**Formatted SPL output** — numbered steps, bolded headings, and syntax-styled code blocks with inline field highlighting, instead of one dense wrapped paragraph:
 
-![Empty chat state](screenshots/chat-empty-state.png)
+![SPL code block formatting](screenshots/chat-spl-code-formatting.png)
 
 ## Value for the Customer
 
@@ -104,7 +104,10 @@ A few non-obvious issues came up getting this running in an actual air-gapped en
 | `ModuleNotFoundError: No module named 'splunklib'` | Not every Splunk build ships the Python SDK for custom commands | Vendor `splunklib` directly into the app's `bin/` folder (from the official `splunk-sdk` PyPI package) |
 | Command still "unknown" with everything else correct | `commands.conf` defaulted to `generating = false` | `GeneratingCommand`-based commands need `generating = true` explicitly set |
 | `gzip: stdin: not in gzip format` on extraction | macOS browsers (Safari) often silently decompress `.tar.gz` downloads | Extract with plain `tar -xf` (auto-detects format) instead of `tar -xzf` |
-| `NameResolutionError` on a placeholder-looking hostname | Template placeholder in `OLLAMA_URL` never replaced with the real address, or a stray `<`/`>` left in during editing | Confirm the exact string with `grep OLLAMA_URL bin/ollamachat.py` before assuming it's a network problem |
+| `NameResolutionError` on a placeholder-looking hostname | Template placeholder in `OLLAMA_URL` never replaced with the real address, or a stray `<`/`>` left in during editing | Confirm the exact string with `grep ollama_url default/ai_chatbot_settings.conf` before assuming it's a network problem |
+| `service.confs[...]` fails with `HTTP 404 Not Found -- Action forbidden` | Splunk's REST config API can be restricted in locked-down environments | Read `.conf` settings directly off disk (`configparser`) instead of via `service.confs` — see `bin/chatbot_settings.py` |
+| Layout/formatting changes don't appear after redeploying | Browser aggressively caches static JS/CSS; Splunk doesn't auto-bust that cache when app files are replaced on disk | Hard refresh (Cmd+Shift+R / Ctrl+Shift+R) after every redeploy that touches `appserver/static/` |
+| `.tar.gz` file changes never show up in `git status` after committing | A blanket `*.tar.gz` rule in `.gitignore` silently excludes the app package from every commit | Add a specific exception (`!path/to/chatbot_app.tar.gz`) and `git add -f` it once |
 
 ## Roadmap
 
